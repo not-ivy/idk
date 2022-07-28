@@ -4,8 +4,8 @@ import MoodIndex from "../components/MoodIndex"
 
 export default function HomePage() {
   return (
-    <div className="w-full h-full flex justify-around items-center flex-col">
-      <h3 className="dark:text-white text-2xl">Home Page</h3>
+    <div className="row-span-3 flex justify-around items-center flex-col">
+      <p>The UI design is totally not stolen from l1v's heartbeat website</p>
       <div className="flex flex-row justify-around w-full">
         <MoodIndex />
         <LastSeen />

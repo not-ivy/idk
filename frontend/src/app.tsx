@@ -1,7 +1,6 @@
 import random from 'random';
 
-import MoodGraph from './components/MoodGraph'
-import Recorder from './components/Recorder';
+import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 
 export function App() {
@@ -9,8 +8,9 @@ export function App() {
     return { time: n, moodScore: random.int(-5, 5) };
   });
   return (
-    <div className='w-full h-full dark:bg-blue-900'>
+    <div className='w-full h-full grid grid-flow-col grid-rows-4 dark:bg-blue-900'>
       <HomePage />
+      <Navigation />
     </div>
   )
 }
