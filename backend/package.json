@@ -6,6 +6,13 @@
   "type": "module",
   "dependencies": {
     "0http": "^3.4.1",
+    "@prisma/client": "4.1.1",
     "dotenv": "^16.0.1"
+  },
+  "devDependencies": {
+    "prisma": "^4.1.1"
+  },
+  "scripts": {
+    "start": "node ."
   }
 }
