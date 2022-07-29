@@ -17,4 +17,5 @@ model quotes {
   id       Int    @id @default(autoincrement())
   quote    String
   citation String
+  date     BigInt
 }

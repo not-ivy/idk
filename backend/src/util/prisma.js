@@ -21,6 +21,7 @@ async function addQuoteData(data) {
     data: {
       quote,
       citation,
+      date: Date.now(),
     },
   });
 }
