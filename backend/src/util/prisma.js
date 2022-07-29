@@ -70,4 +70,4 @@ async function addDataSafe(type, data, res) {
 export {
   addDataSafe,
   getLastScore,
-}
+};
