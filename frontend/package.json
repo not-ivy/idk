@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "preact": "^10.9.0",
     "recharts": "^2.1.13"
   },
