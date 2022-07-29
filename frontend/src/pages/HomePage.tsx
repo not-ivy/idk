@@ -5,7 +5,7 @@ import Quote from "../components/Quote"
 
 export default function HomePage() {
   return (
-    <div className="self-center">
+    <div className="self-center md:w-2/4">
       <Quote />
       <hr className="my-10 md:my-20"/>
       <div className="flex flex-col md:flex-row items-center justify-around w-full">

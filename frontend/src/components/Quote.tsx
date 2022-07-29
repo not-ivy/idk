@@ -18,9 +18,9 @@ export default function Quote() {
       {
         !quoteData ? <span>Loading...</span> :
           <div>
-            <blockquote className="italic text-center">{quoteData.quote}</blockquote>
-            <div className="items-right">
-              <p>{quoteData.citation}</p>
+            <blockquote className="italic text-center whitespace-pre-wrap">{quoteData.quote}</blockquote>
+            <div className="text-right">
+              <p>- {quoteData.citation}</p>
               <sub>Updated {dayjs.unix(quoteData.date / 1000).fromNow()}</sub>
             </div>
           </div>
