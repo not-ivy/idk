@@ -1,12 +1,22 @@
-import useSWR from "swr";
-
+import { useEffect, useState } from 'preact/hooks';
 export default function MoodIndex() {
-  const { data, error } = useSWR('https://api.idk.i-sp.in/mood')
+  const [moodData, setMoodData] = useState<{ id: number, date: number, score: number } | undefined>(undefined);
 
-  if (error) return <p>Failed to load<br /><pre>{error.toString()}</pre></p>
-  if (!data) return <p>Loading</p>
+  useEffect(() => {
+    fetch('https://api.idk.i-sp.in/mood')
+      .then((res) => res.json())
+      .then((data) => setMoodData(data))
+  }, [])
 
   return (
-    <p>Mood Index: <span>{data.score}</span><br />Updated:<span>{new Date(data.date* 1000).toLocaleString()}</span></p>
+    <div>
+      Mood Index: <br />
+      {!moodData ? <span>Loading...</span> :
+      <div>
+        <span>{moodData.score}</span> <br />
+        Last Updated: <br />
+        <span>{new Date(moodData.date).toLocaleDateString()}</span>
+      </div>}
+    </div>
   )
 }
