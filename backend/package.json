@@ -2,6 +2,5 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "3",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "index.js"
 }
