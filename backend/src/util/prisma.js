@@ -42,6 +42,23 @@ async function getLastScore() {
   }
 }
 
+// duplicated code moment
+async function getlastQuote() {
+  try {
+    const data = await prisma.quotes.findFirst({
+      orderBy: {
+        id: 'desc',
+      },
+    });
+    await prisma.$disconnect();
+    return data;
+  } catch (e) {
+    console.error(e);
+    await prisma.$disconnect();
+    throw Error('Error: cannot get data');
+  }
+}
+
 async function addDataSafe(type, data, res) {
   try {
     switch (type) {
@@ -71,4 +88,5 @@ async function addDataSafe(type, data, res) {
 export {
   addDataSafe,
   getLastScore,
+  getlastQuote,
 };
