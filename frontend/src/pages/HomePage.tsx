@@ -11,8 +11,8 @@ export default function HomePage() {
         Because you know, there's no end to the hypocrisy of the human heart<br />
       </blockquote>
       <p className="text-right">- Honest, The Chainsmokers</p>
-      <hr className="my-20"/>
-      <div className="flex flex-row justify-around w-full">
+      <hr className="my-10 md:my-20"/>
+      <div className="flex flex-col md:flex-row items-center justify-around w-full">
         <MoodIndex />
         <LastSeen />
         <DiscordStatus /> 

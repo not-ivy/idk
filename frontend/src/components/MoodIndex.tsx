@@ -12,7 +12,7 @@ export default function MoodIndex() {
     <div>
       Mood Index: <br />
       {!moodData ? <span>Loading...</span> :
-      <div>
+      <div className='text-center'>
         <span>{moodData.score}</span> <br />
         Last Updated: <br />
         <span>{new Date(moodData.date).toLocaleDateString()}</span>
