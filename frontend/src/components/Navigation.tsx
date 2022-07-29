@@ -1,6 +1,6 @@
 export default function Navigation() {
   return (
-    <div className="flex justify-center self-center">
+    <div className="self-center">
       <a href="#">Home</a>
       <span>&nbsp;-&nbsp;</span>
       <a href="#">Graph</a>

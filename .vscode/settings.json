@@ -1,0 +1,6 @@
+{
+  "editor.suggest.showStatusBar": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
