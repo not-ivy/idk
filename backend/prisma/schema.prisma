@@ -8,8 +8,8 @@ datasource db {
 }
 
 model mooddata {
-  id    Int @id @default(autoincrement())
-  date  Int
+  id    Int    @id @default(autoincrement())
+  date  BigInt
   score Int
 }
 

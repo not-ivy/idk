@@ -3,13 +3,13 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function addMoodData(data) {
-  const { score } = data;
+  const { score, date } = data;
   if (Number.isNaN(score) || score < -5 || score > 5) {
     throw Error('Invalid score');
   }
   await prisma.mooddata.create({
     data: {
-      date: Date.now(),
+      date,
       score: parseInt(score, 10),
     },
   });
