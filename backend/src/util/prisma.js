@@ -3,8 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function addMoodData(data) {
-  const mood = JSON.parse(data);
-  const { score } = mood;
+  const { score } = data;
   if (Number.isNaN(score) || score < -5 || score > 5) {
     throw Error('Invalid score');
   }
@@ -17,8 +16,7 @@ async function addMoodData(data) {
 }
 
 async function addQuoteData(data) {
-  const quoteObj = JSON.parse(data);
-  const { quote, citation } = quoteObj;
+  const { quote, citation } = data;
   await prisma.quotes.create({
     data: {
       quote,
@@ -27,11 +25,22 @@ async function addQuoteData(data) {
   });
 }
 
-async function addDataSafe(type, data, res) {
-  if (type !== 'mood' || type !== 'quote') return;
+export default async function addDataSafe(type, data, res) {
   try {
-    if (type === 'mood') await addMoodData(data);
-    if (type === 'quote') await addQuoteData(data);
+    switch (type) {
+      case 'mood': {
+        await addMoodData(data);
+        break;
+      }
+      case 'quote': {
+        await addQuoteData(data);
+        break;
+      }
+      default: {
+        res.end('Unknown type. Avalible types: mood, quote');
+        return;
+      }
+    }
   } catch (e) {
     console.error(e);
     await prisma.$disconnect();
@@ -41,5 +50,3 @@ async function addDataSafe(type, data, res) {
   await prisma.$disconnect();
   res.end('Recorded');
 }
-
-export default addDataSafe;
