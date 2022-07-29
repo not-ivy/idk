@@ -10,7 +10,7 @@ const { router, server } = cero();
 
 const port = process.env.PORT || 8080;
 
-router.use('/', CORS)
+router.use('/', CORS);
 router.get('/', Home);
 router.get('/mood', Mood);
 
