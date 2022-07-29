@@ -1,17 +1,19 @@
-import 'dotenv/config'
-import cero from '0http'
-import Mood from './routes/auth/mood.js'
-import Authorization from './routes/authorization.js'
-import Home from './routes/Home.js'
-const { router, server } = cero()
+import 'dotenv/config';
+import cero from '0http';
+import Mood from './routes/auth/mood.js';
+import Authorization from './routes/authorization.js';
+import Home from './routes/home.js';
 
-const port = process.env.PORT || 8080
+const { router, server } = cero();
 
-router.get('/', Home)
+const port = process.env.PORT || 8080;
 
-router.use('/auth', Authorization)
-router.post('/auth/mood', Mood)
+router.get('/', Home);
 
-server.listen(port)
+router.use('/auth', Authorization);
+router.post('/auth/mood', Mood);
 
-console.log(`Listening on port ${port}`)
+server.listen(port);
+
+// eslint-disable-next-line no-console
+console.log(`Listening on port ${port}`);
