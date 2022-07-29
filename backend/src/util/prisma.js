@@ -25,7 +25,23 @@ async function addQuoteData(data) {
   });
 }
 
-export default async function addDataSafe(type, data, res) {
+async function getLastScore() {
+  try {
+    const data = await prisma.mooddata.findFirst({
+      orderBy: {
+        id: 'desc',
+      },
+    });
+    await prisma.$disconnect();
+    return data;
+  } catch (e) {
+    console.error(e);
+    await prisma.$disconnect();
+    throw Error('Error: cannot get data');
+  }
+}
+
+async function addDataSafe(type, data, res) {
   try {
     switch (type) {
       case 'mood': {
@@ -49,4 +65,9 @@ export default async function addDataSafe(type, data, res) {
   }
   await prisma.$disconnect();
   res.end('Recorded');
+}
+
+export {
+  addDataSafe,
+  getLastScore,
 }

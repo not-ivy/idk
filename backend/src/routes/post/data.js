@@ -1,4 +1,4 @@
-import addDataSafe from '../../util/prisma.js';
+import { addDataSafe } from '../../util/prisma.js';
 
 export default function Data(req, res) {
   let body = '';
