@@ -18,7 +18,7 @@ export default function MoodIndex() {
       {!moodData ? <span>Loading...</span> :
       <div className='text-center'>
         <span>Mood Index: {moodData.score}</span> <br />
-        <span>Updated: {dayjs.unix(moodData.date / 1000).fromNow()}</span>
+        <span>Updated {dayjs.unix(moodData.date / 1000).fromNow()}</span>
       </div>}
     </div>
   )
