@@ -4,11 +4,13 @@ import Authorization from './routes/post/authorization.js';
 import Home from './routes/home.js';
 import Data from './routes/post/data.js';
 import Mood from './routes/mood.js';
+import CORS from './routes/cors.js';
 
 const { router, server } = cero();
 
 const port = process.env.PORT || 8080;
 
+router.use('/', CORS)
 router.get('/', Home);
 router.get('/mood', Mood);
 
