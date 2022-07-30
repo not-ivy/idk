@@ -15,9 +15,9 @@ client.on('presenceUpdate', (_old, newPresence) => {
     presence = {
       status: newPresence.status,
       custom: {
-        name: newPresence.activities[0].name ?? undefined,
+        name: (newPresence.activities[0].name === 'Custom Status' && newPresence.activities[1]) ? newPresence.activities[1].name : 'Custom Status',
         emoji: (newPresence.activities[0].emoji) ? newPresence.activities[0].emoji.url : undefined,
-        text: newPresence.activities[0].state ?? undefined,
+        text: (!newPresence.activities[0].state && newPresence.activities[1]) ? newPresence.activities[1].state : undefined,
       },
     };
   }
