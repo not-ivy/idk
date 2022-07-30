@@ -13,12 +13,14 @@ export default function Quote() {
       .then((data) => { setQuoteData(data); console.log(data) })
   }, [])
 
+  if (!quoteData) return (<p>Loading...</p>)
+
   return (
     <div>
-      <blockquote className="italic text-center whitespace-pre-wrap">{!quoteData ? "Loading..." : quoteData.quote}</blockquote>
+      <blockquote className="italic text-center whitespace-pre-wrap">{quoteData.quote}</blockquote>
       <div className="text-right">
-        <p>{!quoteData ? "loading..." : quoteData.citation}</p>
-        <sub>{!quoteData ? "loading..." : `Updated ${dayjs.unix(quoteData.date / 1000).fromNow()}`}</sub>
+        <p>{quoteData.citation}</p>
+        <sub>Updated {dayjs.unix(quoteData.date / 1000).fromNow()}</sub>
       </div>
     </div>
   )

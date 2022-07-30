@@ -12,10 +12,13 @@ export default function LastSeen() {
       .then((res) => res.json())
       .then((data) => { setHeartbeat(data); console.log(data) })
   }, [])
+
+  if (!heartbeat) return (<p>Loading...</p>)
+
   return (
     <p className='text-center'>
       Last seen:<br />
-      {!heartbeat ? <span>loading...</span> : <span>{dayjs.unix(heartbeat.time / 1000).fromNow()}</span>}
+      <span>{dayjs.unix(heartbeat.time / 1000).fromNow()}</span>
     </p>
   )
 }
