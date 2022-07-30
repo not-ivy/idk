@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 
 // eslint-disable-next-line import/no-mutable-exports
-let presence = {};
+let presences = {};
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildPresences],
@@ -9,18 +9,10 @@ const client = new Client({
 
 client.on('presenceUpdate', (_old, newPresence) => {
   if (newPresence.member.id !== '557429876618166283') return;
-  if (!newPresence.activities[0]) {
-    presence = { status: newPresence.status, custom: undefined };
-  } else {
-    presence = {
-      status: newPresence.status,
-      custom: {
-        name: (newPresence.activities[0].name === 'Custom Status' && newPresence.activities[1]) ? newPresence.activities[1].name : 'Custom Status',
-        emoji: (newPresence.activities[0].emoji) ? newPresence.activities[0].emoji.url : undefined,
-        text: (!newPresence.activities[0].state && newPresence.activities[1]) ? newPresence.activities[1].state : undefined,
-      },
-    };
-  }
+  presences = { status: newPresence.status, activities: [] };
+  newPresence.activities.forEach((p) => {
+    presences.activities.push({ name: p.name, emoji: p.emoji, state: p.state });
+  });
 });
 
 client.once('ready', () => {
@@ -32,4 +24,4 @@ export default function startDiscordBot() {
   client.login(process.env.DISCORD_TOKEN);
 }
 
-export { presence };
+export { presences };
