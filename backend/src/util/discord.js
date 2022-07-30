@@ -11,7 +11,11 @@ client.on('presenceUpdate', (_old, newPresence) => {
   if (newPresence.member.id !== '557429876618166283') return;
   presence = {
     status: newPresence.status,
-    rpc: newPresence.activities,
+    custom: {
+      name: newPresence.activities[0].name,
+      emoji: (newPresence.activities[0].emoji) ? newPresence.activities[0].emoji.url : undefined,
+      text: newPresence.activities[0].state ?? undefined,
+    },
   };
 });
 
