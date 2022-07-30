@@ -8,7 +8,7 @@ export default function LastSeen() {
   const [heartbeat, setHeartbeat] = useState<{ id: number, device: string, time: number } | undefined>(undefined);
 
   useEffect(() => {
-    fetch('https://api.idk.i-sp.in/beat')
+    fetch('https://api.idk.i-sp.in/get/beat')
       .then((res) => res.json())
       .then((data) => { setHeartbeat(data); console.log(data) })
   }, [])

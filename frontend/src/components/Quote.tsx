@@ -8,7 +8,7 @@ export default function Quote() {
   const [quoteData, setQuoteData] = useState<{ id: number, quote: string, citation: string, date: number } | undefined>(undefined);
 
   useEffect(() => {
-    fetch('https://api.idk.i-sp.in/quote')
+    fetch('https://api.idk.i-sp.in/get/quote')
       .then((res) => res.json())
       .then((data) => { setQuoteData(data); console.log(data) })
   }, [])
