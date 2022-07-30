@@ -115,10 +115,33 @@ async function getLastBeat() {
   }
 }
 
+async function getRangeBeat(upper, lower) {
+  try {
+    const data = await prisma.heartbeat.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+      where: {
+        id: {
+          gt: lower,
+          lt: upper,
+        },
+      },
+    });
+    await prisma.$disconnect();
+    return data;
+  } catch (e) {
+    console.error(e);
+    await prisma.$disconnect();
+    throw new Error('Error: cannot get data');
+  }
+}
+
 export {
   addDataSafe,
   getLastScore,
   getlastQuote,
   getLastBeat,
   createBeat,
+  getRangeBeat,
 };
