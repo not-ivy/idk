@@ -21,7 +21,7 @@ export default function HeartbeatList() {
   if (!heartbeats) return (<p>Loading...</p>)
 
   return (
-    <table className="table-auto w-full">
+    <table className="table-auto h-min w-full">
       <tr className='border-b-2 border-b-zinc-500'>
         <th>id</th>
         <th>time</th>
