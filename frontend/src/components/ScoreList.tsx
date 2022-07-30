@@ -1,0 +1,39 @@
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { useEffect, useState } from 'preact/hooks';
+
+dayjs.extend(relativeTime);
+
+export default function HeartbeatList() {
+  const [moodList, setMoodList] = useState<{ id: number, date: number, score: number }[] | undefined>(undefined);
+
+  useEffect(() => {
+    // need to find a better way to do this
+    fetch('https://api.idk.i-sp.in/get/mood/')
+      .then((res) => res.json())
+      .then((data) => {
+        fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - 20}`)
+          .then((res) => res.json())
+          .then((data) => { setMoodList(data); console.log(data) })
+      })
+  }, [])
+
+  if (!moodList) return (<p>Loading...</p>)
+
+  return (
+    <table className="table-auto w-full">
+      <tr className='border-b-2 border-b-zinc-500'>
+        <th>id</th>
+        <th>date</th>
+        <th>score</th>
+      </tr>
+      {moodList.map((m) => (
+        <tr className='text-center border-b-2 border-b-zinc-700'>
+          <td>{m.id}</td>
+          <td>{dayjs.unix(m.date / 1000).fromNow()}<sub className='text-xs text-zinc-400'>{dayjs.unix(m.date / 1000).format('H:mm M/D/YYYY')}</sub></td>
+          <td>{m.score}</td>
+        </tr>
+      ))}
+    </table>
+  )
+}

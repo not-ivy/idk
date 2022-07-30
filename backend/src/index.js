@@ -19,6 +19,7 @@ router.get('/', Home);
 router.use('/', Middleware);
 
 router.get('/get/mood', Mood);
+router.get('/get/mood/:range', Mood);
 router.get('/get/quote', Quote);
 router.get('/get/beat', Beat);
 router.get('/get/beat/:range', Beat);

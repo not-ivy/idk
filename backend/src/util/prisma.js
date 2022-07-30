@@ -52,6 +52,28 @@ async function getLastScore() {
   }
 }
 
+async function getRangeScore(upper, lower) {
+  try {
+    const data = await prisma.mooddata.findMany({
+      orderBy: {
+        id: 'desc',
+      },
+      where: {
+        id: {
+          gt: lower,
+          lt: upper,
+        },
+      },
+    });
+    await prisma.$disconnect();
+    return data;
+  } catch (e) {
+    console.error(e);
+    await prisma.$disconnect();
+    throw new Error('Error: cannot get data');
+  }
+}
+
 // duplicated code moment
 async function getlastQuote() {
   try {
@@ -144,4 +166,5 @@ export {
   getLastBeat,
   createBeat,
   getRangeBeat,
+  getRangeScore,
 };
