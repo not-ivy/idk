@@ -16,8 +16,8 @@ const { router, server } = cero();
 const port = process.env.PORT || 8080;
 
 router.get('/', Home);
+router.use('/', Middleware);
 
-router.use('/get', Middleware);
 router.get('/get/mood', Mood);
 router.get('/get/quote', Quote);
 router.get('/get/beat', Beat);
