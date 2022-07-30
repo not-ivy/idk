@@ -6,6 +6,7 @@ import Data from './routes/post/data.js';
 import Mood from './routes/mood.js';
 import CORS from './routes/cors.js';
 import Quote from './routes/quote.js';
+import Beat from './routes/beat.js';
 
 const { router, server } = cero();
 
@@ -15,6 +16,7 @@ router.use('/', CORS);
 router.get('/', Home);
 router.get('/mood', Mood);
 router.get('/quote', Quote);
+router.get('/beat', Beat);
 
 router.use('/post', Authorization);
 router.post('/post/data', Data);

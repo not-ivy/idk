@@ -26,6 +26,16 @@ async function addQuoteData(data) {
   });
 }
 
+async function createBeat(data) {
+  const { device } = data;
+  await prisma.heartbeat.create({
+    data: {
+      device,
+      time: Date.now(),
+    },
+  });
+}
+
 async function getLastScore() {
   try {
     const data = await prisma.mooddata.findFirst({
@@ -70,8 +80,12 @@ async function addDataSafe(type, data, res) {
         await addQuoteData(data);
         break;
       }
+      case 'beat': {
+        await createBeat(data);
+        break;
+      }
       default: {
-        res.end('Unknown type. Avalible types: mood, quote');
+        res.end('Unknown type. Avalible types: mood, quote, beat');
         return;
       }
     }
@@ -85,8 +99,26 @@ async function addDataSafe(type, data, res) {
   res.end('Recorded');
 }
 
+async function getLastBeat() {
+  try {
+    const data = await prisma.heartbeat.findFirst({
+      orderBy: {
+        id: 'desc',
+      },
+    });
+    await prisma.$disconnect();
+    return data;
+  } catch (e) {
+    console.error(e);
+    await prisma.$disconnect();
+    throw Error('Error: cannot get data');
+  }
+}
+
 export {
   addDataSafe,
   getLastScore,
   getlastQuote,
+  getLastBeat,
+  createBeat,
 };

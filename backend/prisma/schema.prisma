@@ -19,3 +19,9 @@ model quotes {
   citation String
   date     BigInt
 }
+
+model heartbeat {
+  id     Int    @id @default(autoincrement())
+  time   BigInt
+  device String
+}
