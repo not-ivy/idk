@@ -4,15 +4,17 @@ import { useEffect, useState } from 'preact/hooks';
 
 dayjs.extend(relativeTime);
 
-export default function HeartbeatList() {
+export default function MoodList() {
   const [moodList, setMoodList] = useState<{ id: number, date: number, score: number }[] | undefined>(undefined);
 
   useEffect(() => {
     // need to find a better way to do this
-    fetch('https://api.idk.i-sp.in/get/mood/')
+    fetch('https://api.idk.i-sp.in/get/mood')
       .then((res) => res.json())
       .then((data) => {
-        fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - 20}`)
+        let d = 20;
+        if (data.id - 20 < 0) d = data.id;
+        fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setMoodList(data); console.log(data) })
       })
