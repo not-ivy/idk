@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router';
 import Navigation from './components/Navigation';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
+import DataPage from './pages/DataPage';
 
 export function App() {
   return (
@@ -10,6 +11,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/data" element={<DataPage />} />
       </Routes>
       <Navigation />
     </div>
