@@ -1,10 +1,16 @@
+import { Routes, Route } from 'react-router';
+
 import Navigation from './components/Navigation';
+import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 
 export function App() {
   return (
     <div className='w-full h-full flex flex-col justify-around text-black bg-white dark:bg-black dark:text-white'>
-      <HomePage />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+      </Routes>
       <Navigation />
     </div>
   )
