@@ -9,10 +9,10 @@ export default function HeartbeatList() {
 
   useEffect(() => {
     // need to find a better way to do this
-    fetch('http://localhost:8080/get/beat/')
+    fetch('https://api.idk.i-sp.in/get/beat/')
       .then((res) => res.json())
       .then((data) => {
-        fetch(`http://localhost:8080/get/beat/${data.id}-${data.id - 20}`)
+        fetch(`https://api.idk.i-sp.in/get/beat/${data.id}-${data.id - 20}`)
           .then((res) => res.json())
           .then((data) => { setHeartbeats(data); console.log(data) })
       })
