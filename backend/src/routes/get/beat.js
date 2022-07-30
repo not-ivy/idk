@@ -1,5 +1,5 @@
-import { getLastBeat } from '../util/prisma.js';
-import serialize from '../util/serialize.js';
+import { getLastBeat } from '../../util/prisma.js';
+import serialize from '../../util/serialize.js';
 
 export default function Beat(req, res) {
   getLastBeat().then((data) => {
