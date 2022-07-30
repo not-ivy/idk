@@ -11,7 +11,12 @@ client.on('presenceUpdate', (_old, newPresence) => {
   if (newPresence.member.id !== '557429876618166283') return;
   presences = { status: newPresence.status, activities: [] };
   newPresence.activities.forEach((p) => {
-    presences.activities.push({ name: p.name, emoji: p.emoji, state: p.state });
+    presences.activities.push({
+      name: p.name,
+      emoji: p.emoji,
+      state: p.state,
+      created: p.createdTimestamp,
+    });
   });
 });
 
