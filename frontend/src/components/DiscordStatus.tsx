@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'preact/hooks';
 
 export default function DiscordStatus() {
-  const [presence, setPresence] = useState<{ status: string, custom: { name: string, text: string, emoji: string } } | undefined>(undefined);
+  const [presence, setPresence] = useState<{ status: string, custom: { name: string, text: string, emoji: string } | undefined } | undefined>(undefined);
 
   useEffect(() => {
-    fetch('https://api.idk.i-sp.in/presence')
+    fetch('http://localhost:8080/presence')
       .then((res) => res.json())
-      .then((data) => setPresence(data));
+      .then((data) => {setPresence(data); console.log(data)});
   }, [])
 
   return (
