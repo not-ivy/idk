@@ -5,7 +5,7 @@ import Authorization from './routes/post/authorization.js';
 import Home from './routes/home.js';
 import Data from './routes/post/data.js';
 import Mood from './routes/get/mood.js';
-import Middleware from './routes/middleware.js';
+import Middleware from './util/middleware.js';
 import Quote from './routes/get/quote.js';
 import Beat from './routes/get/beat.js';
 import Presence from './routes/get/presence.js';
