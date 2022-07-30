@@ -4,7 +4,7 @@ export default function DiscordStatus() {
   const [presence, setPresence] = useState<{ status: string, custom: { name: string, text: string, emoji: string } | undefined } | undefined>(undefined);
 
   useEffect(() => {
-    fetch('http://localhost:8080/presence')
+    fetch('https://api.idk.i-sp.in/presence')
       .then((res) => res.json())
       .then((data) => {setPresence(data); console.log(data)});
   }, [])
