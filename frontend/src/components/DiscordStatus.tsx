@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'preact/hooks';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 type Activity = {
   name: string | null,
   emoji: string | null,
-  state: string | null
+  state: string | null,
+  created: number | null,
 }
 
 type DiscordState = {
@@ -28,7 +33,7 @@ export default function DiscordStatus() {
       {presence.activities?.map((p) => (
         <div className='flex justify-center'>
           {p.emoji ? <img src={p.emoji} className="w-5 h-5 mr-4" alt="emoji" /> : ''}
-          {p.name} {p.state ? `- ${p.state}` : ''}
+          Started <p className="px-1 cursor-help" title={p.state ?? 'no state'}>{p.name}</p> {p.created ? `${dayjs.unix(p.created / 1000).fromNow()}` : ''}
         </div>
       ))}
     </p>
