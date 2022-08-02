@@ -60,7 +60,7 @@ async function getRangeData(type, upper, lower) {
 }
 
 async function getLastData(type) {
-  if (type !== 'quotes' || type !== 'heartbeat' || type !== 'mooddata') return undefined;
+  if (type !== 'quotes' && type !== 'heartbeat' && type !== 'mooddata') return undefined;
   try {
     const data = await prisma[type].findFirst({
       orderBy: {
