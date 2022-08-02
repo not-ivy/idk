@@ -6,4 +6,4 @@ interface InterfaceMood {
 
 type MoodList = InterfaceMood[];
 
-export { InterfaceMood, MoodList };
+export type { InterfaceMood, MoodList };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { QuotesList } from "../types/quote";
+import type { QuotesList } from "../types/quote";
 
 dayjs.extend(relativeTime);
 

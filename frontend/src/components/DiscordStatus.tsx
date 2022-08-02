@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { DiscordState } from '../types/discord';
+import type { DiscordState } from '../types/discord';
 
 dayjs.extend(relativeTime);
 

@@ -7,4 +7,4 @@ interface InterfaceQuote {
 
 type QuotesList = InterfaceQuote[];
 
-export { InterfaceQuote, QuotesList }
+export type { InterfaceQuote, QuotesList };

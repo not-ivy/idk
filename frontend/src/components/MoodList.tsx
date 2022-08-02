@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useEffect, useState } from 'preact/hooks';
-import { MoodList } from '../types/mood';
+import type { MoodList } from '../types/mood';
 
 dayjs.extend(relativeTime);
 

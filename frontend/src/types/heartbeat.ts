@@ -6,4 +6,4 @@ interface InterfaceHeartbeat {
 
 type HeartbeatList = InterfaceHeartbeat[];
 
-export { InterfaceHeartbeat, HeartbeatList };
+export type { InterfaceHeartbeat, HeartbeatList };

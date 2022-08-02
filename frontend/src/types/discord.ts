@@ -11,4 +11,4 @@ type DiscordState = {
   activities: Activity[] | undefined
 }
 
-export { Activity, DiscordState };
+export type { Activity, DiscordState };

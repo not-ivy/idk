@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useEffect, useState } from 'preact/hooks';
-import { HeartbeatList } from '../types/heartbeat';
+import type { HeartbeatList } from '../types/heartbeat';
 
 dayjs.extend(relativeTime);
 

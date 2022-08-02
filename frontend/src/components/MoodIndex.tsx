@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { InterfaceMood } from '../types/mood';
+import type { InterfaceMood } from '../types/mood';
 
 dayjs.extend(relativeTime);
 
