@@ -1,5 +1,6 @@
 import HeartbeatList from "../components/HeartbeatList";
 import MoodList from "../components/MoodList";
+import QuoteList from "../components/QuoteList";
 
 export default function DataPage() {
   return (
@@ -7,6 +8,7 @@ export default function DataPage() {
       <div className="flex flex-row">
         <MoodList />
         <HeartbeatList />
+        <QuoteList />
       </div>
     </div>
   )
