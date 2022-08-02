@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useEffect, useState } from 'preact/hooks';
-import type { HeartbeatList } from '../types/heartbeat';
+import type { TypeHeartBeatList } from '../types/heartbeat';
 
 dayjs.extend(relativeTime);
 
 export default function HeartbeatList() {
-  const [heartbeats, setHeartbeats] = useState<HeartbeatList | undefined>(undefined);
+  const [heartbeats, setHeartbeats] = useState<TypeHeartBeatList | undefined>(undefined);
 
   useEffect(() => {
     // need to find a better way to do this

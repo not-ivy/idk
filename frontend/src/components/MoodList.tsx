@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useEffect, useState } from 'preact/hooks';
-import type { MoodList } from '../types/mood';
+import type { TypeMoodList } from '../types/mood';
 
 dayjs.extend(relativeTime);
 
 export default function MoodList() {
-  const [moodList, setMoodList] = useState<MoodList | undefined>(undefined);
+  const [moodList, setMoodList] = useState<TypeMoodList | undefined>(undefined);
 
   useEffect(() => {
     // need to find a better way to do this

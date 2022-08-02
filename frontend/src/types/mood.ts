@@ -4,6 +4,6 @@ interface InterfaceMood {
   score: number
 }
 
-type MoodList = InterfaceMood[];
+type TypeMoodList = InterfaceMood[];
 
-export type { InterfaceMood, MoodList };
+export type { InterfaceMood, TypeMoodList };

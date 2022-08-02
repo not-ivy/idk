@@ -5,6 +5,6 @@ interface InterfaceQuote {
   date: number
 }
 
-type QuotesList = InterfaceQuote[];
+type TypeQuoteList = InterfaceQuote[];
 
-export type { InterfaceQuote, QuotesList };
+export type { InterfaceQuote, TypeQuoteList };
