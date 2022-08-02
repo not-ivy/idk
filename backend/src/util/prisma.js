@@ -36,25 +36,10 @@ async function createBeat(data) {
   });
 }
 
-async function getLastScore() {
+async function getRangeData(type, upper, lower) {
+  if (type !== 'quotes' || type !== 'heartbeat' || type !== 'mooddata') return undefined;
   try {
-    const data = await prisma.mooddata.findFirst({
-      orderBy: {
-        id: 'desc',
-      },
-    });
-    await prisma.$disconnect();
-    return data;
-  } catch (e) {
-    console.error(e);
-    await prisma.$disconnect();
-    throw Error('Error: cannot get data');
-  }
-}
-
-async function getRangeScore(upper, lower) {
-  try {
-    const data = await prisma.mooddata.findMany({
+    const data = await prisma[type].findMany({
       orderBy: {
         id: 'desc',
       },
@@ -74,10 +59,10 @@ async function getRangeScore(upper, lower) {
   }
 }
 
-// duplicated code moment
-async function getlastQuote() {
+async function getLastData(type) {
+  if (type !== 'quotes' || type !== 'heartbeat' || type !== 'mooddata') return undefined;
   try {
-    const data = await prisma.quotes.findFirst({
+    const data = await prisma[type].findFirst({
       orderBy: {
         id: 'desc',
       },
@@ -121,50 +106,9 @@ async function addDataSafe(type, data, res) {
   res.end('Recorded');
 }
 
-async function getLastBeat() {
-  try {
-    const data = await prisma.heartbeat.findFirst({
-      orderBy: {
-        id: 'desc',
-      },
-    });
-    await prisma.$disconnect();
-    return data;
-  } catch (e) {
-    console.error(e);
-    await prisma.$disconnect();
-    throw Error('Error: cannot get data');
-  }
-}
-
-async function getRangeBeat(upper, lower) {
-  try {
-    const data = await prisma.heartbeat.findMany({
-      orderBy: {
-        id: 'desc',
-      },
-      where: {
-        id: {
-          gt: lower,
-          lt: upper,
-        },
-      },
-    });
-    await prisma.$disconnect();
-    return data;
-  } catch (e) {
-    console.error(e);
-    await prisma.$disconnect();
-    throw new Error('Error: cannot get data');
-  }
-}
-
 export {
   addDataSafe,
-  getLastScore,
-  getlastQuote,
-  getLastBeat,
+  getLastData,
   createBeat,
-  getRangeBeat,
-  getRangeScore,
+  getRangeData,
 };
