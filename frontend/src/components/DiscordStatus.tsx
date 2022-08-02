@@ -1,20 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { DiscordState } from '../types/discord';
 
 dayjs.extend(relativeTime);
-
-type Activity = {
-  name: string | null,
-  emoji: string | null,
-  state: string | null,
-  created: number | null,
-}
-
-type DiscordState = {
-  status: string,
-  activities: Activity[] | undefined
-}
 
 export default function DiscordStatus() {
   const [presence, setPresence] = useState<DiscordState | undefined>(undefined);

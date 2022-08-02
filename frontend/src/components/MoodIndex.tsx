@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'preact/hooks';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { InterfaceMood } from '../types/mood';
 
 dayjs.extend(relativeTime);
 
 export default function MoodIndex() {
-  const [moodData, setMoodData] = useState<{ id: number, date: number, score: number } | undefined>(undefined);
+  const [moodData, setMoodData] = useState<InterfaceMood | undefined>(undefined);
 
   useEffect(() => {
     fetch('https://api.idk.i-sp.in/get/mood')

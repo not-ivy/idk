@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'preact/hooks';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { InterfaceQuote } from '../types/quote';
 
 dayjs.extend(relativeTime);
 
 export default function Quote() {
-  const [quoteData, setQuoteData] = useState<{ id: number, quote: string, citation: string, date: number } | undefined>(undefined);
+  const [quoteData, setQuoteData] = useState<InterfaceQuote | undefined>(undefined);
 
   useEffect(() => {
     fetch('https://api.idk.i-sp.in/get/quote')
