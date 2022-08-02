@@ -13,7 +13,7 @@ import startDiscordBot from './util/discord.js';
 
 const { router, server } = cero();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 32767;
 
 router.get('/', Home);
 router.use('/', Middleware);
