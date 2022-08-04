@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import type { DiscordState } from '../types/discord';
+import { backendUrl } from '../config.json';
 
 dayjs.extend(relativeTime);
 
@@ -9,7 +10,7 @@ export default function DiscordStatus() {
   const [presence, setPresence] = useState<DiscordState | undefined>(undefined);
 
   useEffect(() => {
-    fetch('https://api.idk.i-sp.in/get/presence')
+    fetch(`${backendUrl}/get/presence`)
       .then((res) => res.json())
       .then((data) => { setPresence(data); console.log(data) })
       .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));

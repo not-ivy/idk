@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useEffect, useState } from 'preact/hooks';
 import type { TypeHeartBeatList } from '../types/heartbeat';
+import { backendUrl } from '../config.json';
 
 dayjs.extend(relativeTime);
 
@@ -10,12 +11,12 @@ export default function HeartbeatList() {
 
   useEffect(() => {
     // need to find a better way to do this
-    fetch('https://api.idk.i-sp.in/get/beat/')
+    fetch(`${backendUrl}/get/beat/`)
       .then((res) => res.json())
       .then((data) => {
         let d = 6;
         if (data.id - d < 0) d = data.id;
-        fetch(`https://api.idk.i-sp.in/get/beat/${data.id}-${data.id - d}`)
+        fetch(`${backendUrl}/get/beat/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setHeartbeats(data); console.log(data) })
           .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));

@@ -14,6 +14,7 @@ import 'chartjs-adapter-dayjs';
 import { useEffect, useState } from 'preact/hooks';
 import { Line } from 'react-chartjs-2';
 import type { TypeMoodList } from '../types/mood';
+import { backendUrl } from '../config.json';
 
 ChartJS.register(
   TimeScale,
@@ -30,12 +31,12 @@ export default function MoodGraph() {
 
   useEffect(() => {
     // need to find a better way to do this
-    fetch('https://api.idk.i-sp.in/get/mood')
+    fetch(`${backendUrl}/get/mood`)
       .then((res) => res.json())
       .then((data) => {
         let d = data.id - 1;
         if (data.id - d < 0) d = data.id;
-        fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - d}`)
+        fetch(`${backendUrl}/get/mood/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setMoodList(data); console.log(data) })
           .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));

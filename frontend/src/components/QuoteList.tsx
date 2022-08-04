@@ -2,6 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import type { TypeQuoteList } from "../types/quote";
+import { backendUrl } from '../config.json';
 
 dayjs.extend(relativeTime);
 
@@ -9,12 +10,12 @@ export default function QuoteList() {
   const [quotesData, setQuotesData] = useState<TypeQuoteList | undefined>(undefined);
 
   useEffect(() => {
-    fetch('https://api.idk.i-sp.in/get/quote')
+    fetch(`${backendUrl}/get/quote`)
     .then((res) => res.json())
     .then((data) => {
       let d = 6;
       if (data.id - d < 0) d = data.id;
-      fetch(`https://api.idk.i-sp.in/get/quote/${data.id}-${data.id - d}`)
+      fetch(`${backendUrl}/quote/${data.id}-${data.id - d}`)
         .then((res) => res.json())
         .then((data) => { setQuotesData(data); console.log(data) })
         .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
