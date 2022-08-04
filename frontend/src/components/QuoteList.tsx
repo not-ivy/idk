@@ -33,7 +33,7 @@ export default function QuoteList() {
       {quotesData.map((q) => (
         <tr className='text-center border-b-2 border-b-zinc-700'>
           <td>{q.id}</td>
-          <td>{q.quote}</td>
+          <td className="whitespace-pre-wrap">{q.quote}</td>
           <td>{q.citation}</td>
           <td>{dayjs.unix(q.date / 1000).fromNow()}<sub className='text-xs text-zinc-400'>{dayjs.unix(q.date / 1000).format('H:mm M/D/YYYY')}</sub></td>
         </tr>
