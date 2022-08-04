@@ -1,28 +1,103 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
+import {
+  Chart as ChartJS,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  ChartOptions,
+  ChartData,
+  TimeScale,
+} from 'chart.js';
+import 'chartjs-adapter-dayjs';
+import { useEffect, useState } from 'preact/hooks';
+import { Line } from 'react-chartjs-2';
+import type { TypeMoodList } from '../types/mood';
 
-interface MoodData {
-  time: number,
-  moodScore: number,
-}
+ChartJS.register(
+  TimeScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-interface GraphProps {
-  data: MoodData[],
-}
+export default function MoodGraph() {
+  const [moodList, setMoodList] = useState<TypeMoodList | undefined>(undefined);
 
-export default function MoodGraph(props: GraphProps) {
-  const { data } = props;
+  useEffect(() => {
+    // need to find a better way to do this
+    fetch('https://api.idk.i-sp.in/get/mood')
+      .then((res) => res.json())
+      .then((data) => {
+        let d = data.id - 1;
+        if (data.id - d < 0) d = data.id;
+        fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - d}`)
+          .then((res) => res.json())
+          .then((data) => { setMoodList(data); console.log(data) })
+          .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+      })
+  }, [])
+
+  if (!moodList) return (<p>Loading...</p>)
+
+
+  const data: ChartData<'line'> = {
+    labels: moodList.map((m) => m.date),
+    datasets: [
+      {
+        label: 'Mood Data',
+        data: moodList.map((m) => m.score),
+        borderColor: '#9CA3AF',
+        cubicInterpolationMode: 'monotone',
+        tension: 0.2,
+        borderWidth: 2,
+      }
+    ]
+  }
+
+  const config: ChartOptions<'line'> = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Line Chart',
+      },
+    },
+    scales: {
+      x: {
+        type: 'time',
+        title: {
+          display: true,
+          text: 'Date'
+        },
+        grid: {
+          borderWidth: 2,
+          display: true,
+          borderColor: '#9CA3AF',
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Score'
+        },
+        grid: {
+          borderWidth: 2,
+          display: true,
+          borderColor: '#9CA3AF',
+        }
+      },
+    },
+  };
+
   return (
-    <div className='flex flex-col justify-center items-center bg-slate-300 drop-shadow-lg col-span-3 row-span-1'>
-      <h3 class='font-bold text-xl'>Mood Graph</h3>
-      {/* <ResponsiveContainer width="90%" height="80%">
-        <LineChart data={data}>
-          <Line type="monotone" dataKey="moodScore" stroke="#8B5CF6" strokeWidth={3} />
-          <CartesianGrid stroke="#94A3B8" strokeDasharray="3 9" />
-          <XAxis dataKey="time" />
-          <YAxis />
-          <Tooltip formatter={(value: string) => [value, "Score"]} labelFormatter={(label: string) => `Time : ${label}`} />
-        </LineChart>
-      </ResponsiveContainer> */}
-    </div>
+    <Line options={config} data={data} />
   )
 }

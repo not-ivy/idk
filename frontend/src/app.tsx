@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import DataPage from './pages/DataPage';
+import ChartsPage from './pages/ChartsPage';
 
 export function App() {
   return (
@@ -12,6 +13,7 @@ export function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/data" element={<DataPage />} />
+        <Route path="/charts" element={<ChartsPage />} />
       </Routes>
       <Navigation />
     </div>

@@ -9,12 +9,14 @@
     "preview": "vite preview --host --port $PORT"
   },
   "dependencies": {
+    "chart.js": "^3.9.1",
+    "chartjs-adapter-dayjs": "^1.0.0",
     "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
     "preact": "^10.9.0",
+    "react-chartjs-2": "^4.3.1",
     "react-router": "^6.3.0",
-    "react-router-dom": "6",
-    "recharts": "^2.1.13"
+    "react-router-dom": "6"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
