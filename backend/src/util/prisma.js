@@ -37,7 +37,7 @@ async function createBeat(data) {
 }
 
 async function getRangeData(type, upper, lower) {
-  if (type !== 'quotes' || type !== 'heartbeat' || type !== 'mooddata') return undefined;
+  if (type !== 'quotes' && type !== 'heartbeat' && type !== 'mooddata') return undefined;
   try {
     const data = await prisma[type].findMany({
       orderBy: {
