@@ -11,7 +11,8 @@ export default function DiscordStatus() {
   useEffect(() => {
     fetch('https://api.idk.i-sp.in/get/presence')
       .then((res) => res.json())
-      .then((data) => { setPresence(data); console.log(data) });
+      .then((data) => { setPresence(data); console.log(data) })
+      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
   }, [])
 
   if (!presence) return (<p>Loading...</p>)

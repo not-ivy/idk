@@ -12,6 +12,7 @@ export default function MoodIndex() {
     fetch('https://api.idk.i-sp.in/get/mood')
       .then((res) => res.json())
       .then((data) => { setMoodData(data); console.log(data) })
+      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
   }, [])
 
   if (!moodData) return (<p>Loading...</p>)

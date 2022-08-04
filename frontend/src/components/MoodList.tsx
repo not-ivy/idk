@@ -18,6 +18,7 @@ export default function MoodList() {
         fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setMoodList(data); console.log(data) })
+          .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
       })
   }, [])
 

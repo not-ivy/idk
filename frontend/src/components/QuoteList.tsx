@@ -17,6 +17,7 @@ export default function QuoteList() {
       fetch(`https://api.idk.i-sp.in/get/quote/${data.id}-${data.id - d}`)
         .then((res) => res.json())
         .then((data) => { setQuotesData(data); console.log(data) })
+        .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
     })
   }, [])
 

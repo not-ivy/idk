@@ -12,6 +12,7 @@ export default function Quote() {
     fetch('https://api.idk.i-sp.in/get/quote')
       .then((res) => res.json())
       .then((data) => { setQuoteData(data); console.log(data) })
+      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
   }, [])
 
   if (!quoteData) return (<p>Loading...</p>)
