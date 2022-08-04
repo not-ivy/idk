@@ -13,8 +13,8 @@ export default function MoodList() {
     fetch('https://api.idk.i-sp.in/get/mood')
       .then((res) => res.json())
       .then((data) => {
-        let d = 20;
-        if (data.id - 20 < 0) d = data.id;
+        let d = 6;
+        if (data.id - d < 0) d = data.id;
         fetch(`https://api.idk.i-sp.in/get/mood/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setMoodList(data); console.log(data) })

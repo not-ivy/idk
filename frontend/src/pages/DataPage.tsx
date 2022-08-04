@@ -4,12 +4,13 @@ import QuoteList from "../components/QuoteList";
 
 export default function DataPage() {
   return (
-    <div className="self-center md:w-2/4">
+    <div className="self-center md:w-3/4">
       <div className="flex flex-row">
         <MoodList />
         <HeartbeatList />
-        <QuoteList />
       </div>
+      <br />
+      <QuoteList />
     </div>
   )
 }

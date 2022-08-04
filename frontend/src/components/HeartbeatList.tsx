@@ -13,7 +13,9 @@ export default function HeartbeatList() {
     fetch('https://api.idk.i-sp.in/get/beat/')
       .then((res) => res.json())
       .then((data) => {
-        fetch(`https://api.idk.i-sp.in/get/beat/${data.id}-${data.id - 20}`)
+        let d = 6;
+        if (data.id - d < 0) d = data.id;
+        fetch(`https://api.idk.i-sp.in/get/beat/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setHeartbeats(data); console.log(data) })
       })

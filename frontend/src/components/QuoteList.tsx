@@ -12,8 +12,8 @@ export default function QuoteList() {
     fetch('https://api.idk.i-sp.in/get/quote')
     .then((res) => res.json())
     .then((data) => {
-      let d = 20;
-      if (data.id - 20 < 0) d = data.id;
+      let d = 6;
+      if (data.id - d < 0) d = data.id;
       fetch(`https://api.idk.i-sp.in/get/quote/${data.id}-${data.id - d}`)
         .then((res) => res.json())
         .then((data) => { setQuotesData(data); console.log(data) })
