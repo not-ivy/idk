@@ -11,7 +11,7 @@ export default function Navigation() {
       <span>&nbsp;-&nbsp;</span>
       <Link to="/charts">Charts</Link>
       <span>&nbsp;-&nbsp;</span>
-      <a href="https://github.com/i-spin/idk" target="_blank">Source</a>
+      <a href="https://github.com/not-ivy/idk" target="_blank">Source</a>
     </div>
   )
 }
