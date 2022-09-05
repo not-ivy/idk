@@ -7,7 +7,7 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function MoodList() {
-  const [moodList, setMoodList] = useState<TypeMoodList | undefined>(undefined);
+  const [moodList, setMoodList] = useState<TypeMoodList | Error | undefined>(undefined);
 
   useEffect(() => {
     // need to find a better way to do this
@@ -19,11 +19,12 @@ export default function MoodList() {
         fetch(`${backendUrl}/get/mood/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setMoodList(data); console.log(data) })
-          .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+          .catch((error) => { setMoodList(error); console.log(error) });
       })
   }, [])
 
   if (!moodList) return (<p>Loading...</p>)
+  if (moodList instanceof Error) return (<div>Error: <br /> <pre>{moodList.toString()}</pre></div>)
 
   return (
     <table className="table-auto h-min w-full">

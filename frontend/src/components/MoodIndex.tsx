@@ -7,16 +7,17 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function MoodIndex() {
-  const [moodData, setMoodData] = useState<InterfaceMood | undefined>(undefined);
+  const [moodData, setMoodData] = useState<InterfaceMood | Error | undefined>(undefined);
 
   useEffect(() => {
     fetch(`${backendUrl}/get/mood`)
       .then((res) => res.json())
       .then((data) => { setMoodData(data); console.log(data) })
-      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+      .catch((error) => { setMoodData(error); console.log(error) });
   }, [])
 
   if (!moodData) return (<p>Loading...</p>)
+  if (moodData instanceof Error) return (<div>Error: <br /> <pre>{moodData.toString()}</pre></div>)
 
   return (
     <div className='text-center'>

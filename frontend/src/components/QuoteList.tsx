@@ -7,7 +7,7 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function QuoteList() {
-  const [quotesData, setQuotesData] = useState<TypeQuoteList | undefined>(undefined);
+  const [quotesData, setQuotesData] = useState<TypeQuoteList | Error | undefined>(undefined);
 
   useEffect(() => {
     fetch(`${backendUrl}/get/quote`)
@@ -18,11 +18,12 @@ export default function QuoteList() {
       fetch(`${backendUrl}/quote/${data.id}-${data.id - d}`)
         .then((res) => res.json())
         .then((data) => { setQuotesData(data); console.log(data) })
-        .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
-    })
+        .catch((error) => { setQuotesData(error); console.log(error) });
+      })
   }, [])
 
   if (!quotesData) return (<p>Loading...</p>)
+  if (quotesData instanceof Error) return (<div>Error: <br /> <pre>{quotesData.toString()}</pre></div>)
 
   return (
     <table className="table-auto h-min w-full">

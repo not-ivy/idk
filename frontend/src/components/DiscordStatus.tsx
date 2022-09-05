@@ -7,16 +7,17 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function DiscordStatus() {
-  const [presence, setPresence] = useState<DiscordState | undefined>(undefined);
+  const [presence, setPresence] = useState<DiscordState | Error | undefined>(undefined);
 
   useEffect(() => {
     fetch(`${backendUrl}/get/presence`)
       .then((res) => res.json())
       .then((data) => { setPresence(data); console.log(data) })
-      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+      .catch((error) => { setPresence(error) });
   }, [])
 
   if (!presence) return (<p>Loading...</p>)
+  if (presence instanceof Error) return (<div>Error: <pre>{presence.toString()}</pre></div>)
 
   return (
     <p className="text-center">

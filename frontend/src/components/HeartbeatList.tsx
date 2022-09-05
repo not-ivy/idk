@@ -7,7 +7,7 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function HeartbeatList() {
-  const [heartbeats, setHeartbeats] = useState<TypeHeartBeatList | undefined>(undefined);
+  const [heartbeats, setHeartbeats] = useState<TypeHeartBeatList | Error | undefined>(undefined);
 
   useEffect(() => {
     // need to find a better way to do this
@@ -19,11 +19,12 @@ export default function HeartbeatList() {
         fetch(`${backendUrl}/get/beat/${data.id}-${data.id - d}`)
           .then((res) => res.json())
           .then((data) => { setHeartbeats(data); console.log(data) })
-          .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+          .catch((error) => { setHeartbeats(error); console.log(error); });
       })
   }, [])
 
   if (!heartbeats) return (<p>Loading...</p>)
+  if (heartbeats instanceof Error) return (<div>Error: <pre>{heartbeats.toString()}</pre></div>)
 
   return (
     <table className="table-auto h-min w-full">

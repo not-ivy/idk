@@ -7,16 +7,17 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function Quote() {
-  const [quoteData, setQuoteData] = useState<InterfaceQuote | undefined>(undefined);
+  const [quoteData, setQuoteData] = useState<InterfaceQuote | Error | undefined>(undefined);
 
   useEffect(() => {
     fetch(`${backendUrl}/get/quote`)
       .then((res) => res.json())
       .then((data) => { setQuoteData(data); console.log(data) })
-      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+      .catch((error) => { setQuoteData(error); console.log(error) });
   }, [])
 
   if (!quoteData) return (<p>Loading...</p>)
+  if (quoteData instanceof Error) return (<div>Error: <br /> <pre>{quoteData.toString()}</pre></div>)
 
   return (
     <div>

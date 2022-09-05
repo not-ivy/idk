@@ -7,16 +7,17 @@ import { backendUrl } from '../config.json';
 dayjs.extend(relativeTime);
 
 export default function LastSeen() {
-  const [heartbeat, setHeartbeat] = useState<InterfaceHeartbeat | undefined>(undefined);
+  const [heartbeat, setHeartbeat] = useState<InterfaceHeartbeat | Error | undefined>(undefined);
 
   useEffect(() => {
     fetch(`${backendUrl}/get/beat`)
       .then((res) => res.json())
       .then((data) => { setHeartbeat(data); console.log(data) })
-      .catch((error) => (<p>Error: <br /> <pre>{error.stack}</pre></p>));
+      .catch((error) => { setHeartbeat(error); console.log(error) });
   }, [])
 
   if (!heartbeat) return (<p>Loading...</p>)
+  if (heartbeat instanceof Error) return (<div>Error: <pre>{heartbeat.toString()}</pre></div>)
 
   return (
     <p className='text-center'>
