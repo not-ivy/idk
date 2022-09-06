@@ -1,6 +1,5 @@
-import url from 'url';
-import crypto from 'crypto';
-import querystring from 'querystring';
+import url from 'node:url';
+import querystring from 'node:querystring';
 
 let state = '';
 
@@ -8,7 +7,7 @@ export default function Login(req, res) {
   const query = url.parse(req.url, true).query;
   if (query.token !== process.env.TOKEN) return res.end('invalid token')
 
-  state = randHash();
+  state = (Math.random() + 1).toString(36).substring(2);
   res.writeHead(302, {
     'Location': 'https://accounts.spotify.com/authorize?' + querystring.stringify({
       response_type: 'code',
@@ -19,13 +18,6 @@ export default function Login(req, res) {
     }),
   });
   res.end();
-}
-
-function randHash() {
-  return Array.from(
-    crypto.getRandomValues(new Uint8Array(16)),
-    (b) => ('0' + (b & 0xFF).toString(16)).slice(-2)
-  ).join('')
 }
 
 export { state };
