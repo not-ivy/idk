@@ -1,6 +1,6 @@
-import url from 'node:url';
-import crypto from 'node:crypto';
-import querystring from 'node:querystring';
+import url from 'url';
+import crypto from 'crypto';
+import querystring from 'querystring';
 
 let state = '';
 
