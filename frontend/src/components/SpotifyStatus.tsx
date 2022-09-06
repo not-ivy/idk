@@ -16,16 +16,13 @@ export default function SpotifyStatus() {
   if (!spotify) return (<p>Loading...</p>)
   if (spotify instanceof Error) return (<div>Error: <pre>{spotify.toString()}</pre></div>)
 
-  const artists: JSX.Element[] = [];
-  spotify.item.artists.forEach((a) => {
-    artists.push(<a className='underline' href={a.external_urls.spotify}>{a.name}</a>)
-  })
-
   return (
-    <div>
+    <div className='text-center'>
       {spotify.is_playing ? 'Playing' : 'Last played'} <a className='underline' href={spotify.item.external_urls.spotify}>{spotify.item.name}</a> <br />
-      by {artists.join(', ')} <br />
-      in album <a className='underline' href={spotify.item.album.external_urls.spotify}>{spotify.item.album.name}</a> {spotify.repeat_state === 'off' ? '' : 'on repeat'}
-    </div>
+      by {spotify.item.artists.map((a, i) => (
+        <span><a className='underline' href={a.external_urls.spotify}>{a.name}</a>{(i ? '' : ', ')}</span>
+      ))}  <br />
+      {spotify.repeat_state === 'track' ? 'on repeat' : ''}
+      </div>
   )
 }
