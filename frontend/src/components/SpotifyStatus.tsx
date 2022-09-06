@@ -6,7 +6,7 @@ export default function SpotifyStatus() {
   const [spotify, setSpotify] = useState<Spotify | Error | undefined>(undefined);
 
   useEffect(() => {
-    fetch(`${backendUrl}/get/presence`)
+    fetch(`${backendUrl}/get/spotify`)
       .then((res) => res.json())
       .then((data) => { setSpotify(data); console.log(data) })
       .catch((error) => { setSpotify(error); console.log(error) });
