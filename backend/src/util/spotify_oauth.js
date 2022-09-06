@@ -16,7 +16,9 @@ export default function requestAccessToken(code) {
       'Authorization': 'Basic ' + (Buffer.from(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64')),
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-  }).then((res) => res.json()).then((data) => { oauthData = { ...data, expires_at: data.expires_in * 1000 + Date.now() } });
+  }).then((res) => res.json()).then((data) => {
+    oauthData = { ...data, expires_at: data.expires_in * 1000 + Date.now() }
+  });
 }
 
 export { oauthData };
