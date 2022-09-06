@@ -12,12 +12,12 @@ export default function SpotifyStatus() {
       .catch((error) => { setSpotify(error); console.log(error) });
   }, [])
 
-  if (!spotify) return (<p>No spotify data.</p>)
+  if (!spotify) return (<p>Loading...</p>)
   if (spotify instanceof Error) return (<div>Error: <pre>{spotify.toString()}</pre></div>)
 
   return (
     <div>
-      Playing <a className='underline' href={spotify.item.external_urls.spotify}>{spotify.item.name}</a> <br />
+      {spotify.is_playing ? 'Playing' : 'Last played'} <a className='underline' href={spotify.item.external_urls.spotify}>{spotify.item.name}</a> <br />
       by {spotify.item.artists.map((a) => (<a className='underline' href={a.external_urls.spotify}>{a.name}</a>))} <br />
       in album <a className='underline' href={spotify.item.album.external_urls.spotify}>{spotify.item.album.name}</a> {spotify.repeat_state === 'off' ? '' : 'on repeat'}
     </div>
