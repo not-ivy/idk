@@ -1,4 +1,4 @@
-import DiscordStatus from "../components/DiscordStatus"
+import SpotifyStatus from "../components/SpotifyStatus"
 import LastSeen from "../components/LastSeen"
 import MoodIndex from "../components/MoodIndex"
 import Quote from "../components/Quote"
@@ -11,7 +11,7 @@ export default function HomePage() {
       <div className="flex flex-col md:flex-row items-center justify-around w-full">
         <MoodIndex />
         <LastSeen />
-        <DiscordStatus /> 
+        <SpotifyStatus /> 
       </div>
     </div>
   )
