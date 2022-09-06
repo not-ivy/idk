@@ -17,8 +17,8 @@ export default function SpotifyStatus() {
 
   return (
     <div>
-      Playing <a href={spotify.item.external_urls.spotify}>{spotify.item.name}</a> <br />
-      by {spotify.item.artists.map((a) => (<a href={a.external_urls.spotify}>{a.name}</a>))} <br />
+      Playing <a className='underline' href={spotify.item.external_urls.spotify}>{spotify.item.name}</a> <br />
+      by {spotify.item.artists.map((a) => (<a className='underline' href={a.external_urls.spotify}>{a.name}</a>))} <br />
       in album <a className='underline' href={spotify.item.album.external_urls.spotify}>{spotify.item.album.name}</a> {spotify.repeat_state === 'off' ? '' : 'on repeat'}
     </div>
   )
